@@ -1,11 +1,17 @@
 <script setup>
+import { ref, computed } from "vue";
 import Portal from "../Portal.vue";
 import { workoutProgram, exerciseDescriptions } from "../../utils";
 const selectedWorkout = 4;
 const { workout, warmup } = workoutProgram[selectedWorkout];
 
-const selectedExercise = null;
-const exerciseDescription = exerciseDescriptions[selectedExercise];
+// let selectedExercise = null;
+let selectedExercise = ref(null)
+const exerciseDescription = computed(() => exerciseDescriptions[selectedExercise.value]);
+
+function handleCloseModal() {
+  selectedExercise.value = null
+}
 </script>
 
 <template>
@@ -16,7 +22,7 @@ const exerciseDescription = exerciseDescriptions[selectedExercise];
         <small>Description</small>
         <p>{{ exerciseDescription }}</p>
       </div>
-      <button>Close <i class="fa-solid fa-xmark"></i></button>
+      <button @click="handleCloseModal">Close <i class="fa-solid fa-xmark"></i></button>
     </div>
   </Portal>
   <section id="workout-card">
@@ -37,8 +43,8 @@ const exerciseDescription = exerciseDescriptions[selectedExercise];
       <h6 class="grid-weights">Weights</h6>
       <div class="workout-grid-row" v-for="(w, wIdx) in warmup" :key="wIdx">
         <div class="grid-name">
-          <p>Name {{ w.name }}</p>
-          <button>
+          <p>{{ w.name }}</p>
+          <button @click="() => { selectedExercise = w.name}">
             <i class="fa-regular fa-circle-question"></i>
           </button>
         </div>
@@ -54,7 +60,7 @@ const exerciseDescription = exerciseDescriptions[selectedExercise];
       <div class="workout-grid-row" v-for="(w, wIdx) in workout" :key="wIdx">
         <div class="grid-name">
           <p>{{ w.name }}</p>
-          <button>
+          <button @click="() => { selectedExercise = w.name}">
             <i class="fa-regular fa-circle-question"></i>
           </button>
         </div>
