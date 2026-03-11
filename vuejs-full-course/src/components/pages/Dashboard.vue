@@ -1,14 +1,22 @@
-<script setup></script>
+<script setup>
+import Grid from "../Grid.vue"
+import { gymHealthFacts } from "../../utils";
+// generate a random whole integer number between 0 and array length - 1
+const randomNumber = Math.floor(Math.random() * gymHealthFacts.length)
+const todaysFact = gymHealthFacts[randomNumber]
+
+</script>
 
 <template>
   <section id="dashboard">
     <div class="card tip-container">
       <h2>Welcome Smoldier</h2>
       <div>
-        <p class="tip"><strong>Daily Tip</strong><br /></p>
+        <p class="tip"><strong>Daily Tip</strong><br />{{ todaysFact }}</p>
       </div>
       <button>Start workout &rarr;</button>
     </div>
+    <Grid />
   </section>
 </template>
 
