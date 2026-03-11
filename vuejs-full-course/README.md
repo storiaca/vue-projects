@@ -7,3 +7,7 @@ Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://
 ## Video
 
 <https://www.youtube.com/watch?v=JAgeFLJYrUY&t=29s>
+
+## Code
+
+<https://github.com/jamezmca/vuejs-full-course>
