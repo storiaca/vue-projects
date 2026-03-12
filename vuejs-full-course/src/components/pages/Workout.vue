@@ -2,7 +2,10 @@
 import { ref, computed } from "vue";
 import Portal from "../Portal.vue";
 import { workoutProgram, exerciseDescriptions } from "../../utils";
-const selectedWorkout = 4;
+const {data, selectedWorkout} = defineProps({
+  data: Object,
+  selectedWorkout: Number
+})
 const { workout, warmup } = workoutProgram[selectedWorkout];
 
 // let selectedExercise = null;
@@ -66,7 +69,7 @@ function handleCloseModal() {
         </div>
         <p>{{ w.sets }}</p>
         <p>{{ w.reps }}</p>
-        <input class="grid-weights" placeholder="14kg" type="text" />
+        <input v-model="data[selectedWorkout][w.name]" class="grid-weights" placeholder="14kg" type="text" />
       </div>
     </div>
     <div class="card workout-btns">
