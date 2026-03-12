@@ -22,6 +22,7 @@ const selectDisplay = ref(1)
 const data = ref(defaultData) // {1...30: {exercise_name: "", ....}}
 const selectedWorkout = ref(-1)
 
+
 function handleChangeDisplay(idx) {
   selectDisplay.value = idx
 }
@@ -46,7 +47,7 @@ function handleSaveWorkout() {
     <!-- PAGE 1 -->
     <Welcome :handleChangeDisplay="handleChangeDisplay" v-if="selectDisplay == 1"/>
     <!-- PAGE 2 -->
-    <Dashboard v-if="selectDisplay == 2"/>
+    <Dashboard :handleSelectWorkout="handleSelectWorkout" v-if="selectDisplay == 2"/>
     <!-- PAGE 3 -->
     <Workout :data="data" :selectedWorkout="selectedWorkout" v-if="workoutProgram?.[selectedWorkout]"/>
   </Layout>
