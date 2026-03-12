@@ -18,15 +18,33 @@ for(let workoutIdx in workoutProgram) {
   }
 }
 
-const selectDisplay = ref(3)
+const selectDisplay = ref(1)
 const data = ref(defaultData) // {1...30: {exercise_name: "", ....}}
-const selectedWorkout = ref(2)
+const selectedWorkout = ref(-1)
+
+function handleChangeDisplay(idx) {
+  selectDisplay.value = idx
+}
+
+function handleSelectWorkout(idx) {
+  selectDisplay.value = 3
+  selectedWorkout.value = idx
+}
+
+function handleSaveWorkout() {
+  // save the current data snapshot to localstorage so we can retrive it next time
+  localStorage.setItem('workouts', JSON.stringify(data.value))
+  // show the dashboard
+  selectDisplay.value = 2
+  // deselect workout
+  selectDisplay.value = -1
+}
 </script>
 
 <template>
   <Layout>
     <!-- PAGE 1 -->
-    <Welcome v-if="selectDisplay == 1"/>
+    <Welcome :handleChangeDisplay="handleChangeDisplay" v-if="selectDisplay == 1"/>
     <!-- PAGE 2 -->
     <Dashboard v-if="selectDisplay == 2"/>
     <!-- PAGE 3 -->

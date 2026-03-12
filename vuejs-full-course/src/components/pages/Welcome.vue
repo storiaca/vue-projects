@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+defineProps({
+  handleChangeDisplay: Function
+})
+</script>
 
 <template>
   <section id="welcome">
